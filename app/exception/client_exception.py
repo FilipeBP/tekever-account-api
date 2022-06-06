@@ -6,6 +6,6 @@ class ClientException(HTTPException):
         super(ClientException, self).__init__(status_code, detail)
 
 
-class ClientNotFound(ClientException):
+class ClientNotFoundError(ClientException):
     def __init__(self, client_id: str):
-        super(ClientNotFound, self).__init__(404, f"Client '{client_id}' not found.")
+        super(ClientNotFoundError, self).__init__(404, f"Client '{client_id}' not found.")
