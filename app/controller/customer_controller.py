@@ -26,6 +26,7 @@ async def get_customer(
 @router.post(
     '/',
     description='Create a new customer',
+    status_code=201,
     responses={
         201: {'model': CustomerCreated}
     }
@@ -39,6 +40,7 @@ async def create_customer(
 @router.post(
     '/{customerId}/accounts',
     description='Create a new account with its initial balance',
+    status_code=201,
     responses={
         201: {'model': AccountCreated}
     }
