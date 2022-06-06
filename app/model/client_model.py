@@ -16,7 +16,7 @@ class Client(ClientIn):
 
     @classmethod
     def create_client(cls, client_info: ClientIn):
-        return Client(
+        return cls(
             id=str(uuid.uuid4()),
             **client_info.dict()
         )
