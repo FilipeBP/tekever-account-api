@@ -5,19 +5,19 @@ from model.account_model import Account
 from repository import account_repository
 
 
-def get_accounts_by_client(client_id: str) -> List[Account]:
-    return account_repository.get_by_client(client_id)
+def get_accounts_by_customer(customer_id: str) -> List[Account]:
+    return account_repository.get_by_customer(customer_id)
 
 
-def get_account(client_id: str, account_id: str) -> Account:
-    return account_repository.get(client_id, account_id)
+def get_account(customer_id: str, account_id: str) -> Account:
+    return account_repository.get(customer_id, account_id)
 
 
-def create_account(client_id: str, initial_credit: float) -> dict:
-    account = Account.create_account(client_id, initial_credit)
+def create_account(customer_id: str, initial_credit: float) -> dict:
+    account = Account.create_account(customer_id, initial_credit)
     account_id = account_repository.create(account)
 
-    return {'detail': 'Account created', 'id': account_id, 'client_id': client_id}
+    return {'detail': 'Account created', 'id': account_id, 'customer_id': customer_id}
 
 
 def alter_account(customer_id: str, account_id: str, value: float):

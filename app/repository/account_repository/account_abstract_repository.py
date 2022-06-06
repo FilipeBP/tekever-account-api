@@ -11,11 +11,11 @@ class AccountAbstractRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get(self, client_id: str, account_id: str) -> Account:
+    def get(self, customer_id: str, account_id: str) -> Account:
         raise NotImplementedError
 
     @abstractmethod
-    def get_by_client(self, client_id: str) -> List[Account]:
+    def get_by_customer(self, customer_id: str) -> List[Account]:
         raise NotImplementedError
 
     @abstractmethod
@@ -23,5 +23,5 @@ class AccountAbstractRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, client_id: str) -> None:
+    def delete(self, customer_id: str) -> None:
         raise NotImplementedError

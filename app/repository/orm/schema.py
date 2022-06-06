@@ -4,26 +4,26 @@ from sqlalchemy.orm import declarative_base, relationship
 Base = declarative_base()
 
 
-class ClientOrm(Base):
-    __tablename__ = 'clients'
+class CustomerOrm(Base):
+    __tablename__ = 'customers'
 
     id = Column(String, primary_key=True)
     name = Column(String(20), nullable=False)
     surname = Column(String(40))
 
-    accounts = relationship('AccountOrm', back_populates='client')
+    accounts = relationship('AccountOrm', back_populates='customer')
 
 
 class AccountOrm(Base):
     __tablename__ = 'accounts'
 
     id = Column(String, primary_key=True)
-    client_id = Column(String, ForeignKey('clients.id'), index=True)
+    customer_id = Column(String, ForeignKey('customers.id'), index=True)
     balance = Column(Numeric(10, 2), nullable=False)
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
 
-    client = relationship('ClientOrm', back_populates='accounts')
+    customer = relationship('CustomerOrm', back_populates='accounts')
     transactions = relationship('TransactionOrm', back_populates='account')
 
     __table_args__ = (

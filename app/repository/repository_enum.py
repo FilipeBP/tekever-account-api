@@ -1,7 +1,7 @@
 from enum import Enum, auto
 
 
-class ClientRepositoryEnum(str, Enum):
+class CustomerRepositoryEnum(str, Enum):
     def _generate_next_value_(name, start, count, last_values):
         return name.lower()
 

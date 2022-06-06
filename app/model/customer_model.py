@@ -6,22 +6,22 @@ from pydantic import BaseModel, Field
 from model.transaction_model import Transaction
 
 
-class ClientIn(BaseModel):
+class CustomerIn(BaseModel):
     name: str = Field()
     surname: str = Field()
 
 
-class Client(ClientIn):
+class Customer(CustomerIn):
     id: str = Field()
 
     @classmethod
-    def create_client(cls, client_info: ClientIn):
+    def create_customer(cls, customer_info: CustomerIn):
         return cls(
             id=str(uuid.uuid4()),
-            **client_info.dict()
+            **customer_info.dict()
         )
 
 
-class ClientOut(Client):
+class CustomerOut(Customer):
     balance: float = Field(0.0)
     transactions: List[Transaction]

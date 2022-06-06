@@ -14,7 +14,7 @@ class AccountIn(BaseModel):
 
 class Account(BaseModel):
     id: str = Field()
-    client_id: str = Field()
+    customer_id: str = Field()
     balance: float = Field(0.0)
     created_at: datetime = Field()
     updated_at: datetime = Field(None)
@@ -25,10 +25,10 @@ class Account(BaseModel):
         return v
 
     @classmethod
-    def create_account(cls, client_id: str, initial_credit: float):
+    def create_account(cls, customer_id: str, initial_credit: float):
         return cls(
             id=str(uuid.uuid4()),
-            client_id=client_id,
+            customer_id=customer_id,
             balance=initial_credit,
             created_at=datetime.now()
         )

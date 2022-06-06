@@ -3,8 +3,8 @@ from typing import List
 from fastapi import APIRouter, Path, Depends
 
 from model.account_model import Account, AccountIn
-from model.client_model import ClientOut, ClientIn
-from service import client_service, account_service
+from model.customer_model import CustomerOut, CustomerIn
+from service import customer_service, account_service
 
 router = APIRouter()
 
@@ -12,13 +12,13 @@ router = APIRouter()
 @router.get(
     '/{customerId}',
     responses={
-        200: {'model': ClientOut}
+        200: {'model': CustomerOut}
     }
 )
-async def get_client(
+async def get_customer(
     customer_id: str = Path(..., alias='customerId')
 ):
-    return client_service.get_client(customer_id)
+    return customer_service.get_customer(customer_id)
 
 
 @router.post(
@@ -27,10 +27,10 @@ async def get_client(
         201: {'model': str}
     }
 )
-async def create_client(
-    client_info: ClientIn
+async def create_customer(
+    customer_info: CustomerIn
 ):
-    return client_service.create_client(client_info)
+    return customer_service.create_customer(customer_info)
 
 
 @router.post(
@@ -66,10 +66,10 @@ async def create_account(
         200: {'model': List[Account]}
     }
 )
-async def get_accounts_by_client(
+async def get_accounts_by_customer(
     customer_id: str = Path(..., alias='customerId')
 ):
-    return account_service.get_accounts_by_client(customer_id)
+    return account_service.get_accounts_by_customer(customer_id)
 
 
 @router.get(
