@@ -5,10 +5,10 @@ from pydantic import BaseModel, Field
 
 
 class Transaction(BaseModel):
-    id: int = Field(None)
-    account_id: str = Field()
-    amount: float = Field()
-    created_at: datetime = Field()
+    id: int = Field(None, title='Transaction ID', example=1)
+    account_id: str = Field(title='Account ID', example=f'{str(uuid.uuid4())}')
+    amount: float = Field(title='Amount')
+    created_at: datetime = Field(title='Creation datetime', example=f'{datetime.now()}')
 
     @classmethod
     def create_transaction(cls, account_id: str, amount: float):

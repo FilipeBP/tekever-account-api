@@ -9,15 +9,15 @@ from model.validators.account_validators import validate_balance
 
 
 class AccountIn(BaseModel):
-    additional_value: float = Field(0.0)
+    additional_value: float = Field(0.0, description='Additional value to the account', example=2.05)
 
 
 class Account(BaseModel):
-    id: str = Field()
-    customer_id: str = Field()
-    balance: float = Field(0.0)
-    created_at: datetime = Field()
-    updated_at: datetime = Field(None)
+    id: str = Field(title='Account ID', example=f'{str(uuid.uuid4())}')
+    customer_id: str = Field(title='Customer ID', example=f'{str(uuid.uuid4())}')
+    balance: float = Field(0.0, title='Account balance', description='Total amount of transactions of the account')
+    created_at: datetime = Field(title='Creation datetime', example=f'{datetime.now()}')
+    updated_at: datetime = Field(None, title='Update datetime', example=f'{datetime.now()}')
 
     @validator('balance', pre=True)
     def check_balance(cls, v):
@@ -35,4 +35,4 @@ class Account(BaseModel):
 
 
 class AccountOut(Account):
-    transactions: List[Transaction] = Field()
+    transactions: List[Transaction] = Field(description='Every transaction related to the account')
