@@ -2,11 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
 from config import settings
-from exception.client_exception import ClientNotFound
+from exception.client_exception import ClientNotFoundError
 from model.client_model import ClientIn, Client, ClientOut
 from model.transaction_model import Transaction
 from .client_abstract_repository import ClientAbstractRepository
-from ..orm_schema import ClientOrm, AccountOrm, TransactionOrm
+from repository.orm.schema import ClientOrm, AccountOrm, TransactionOrm
 
 
 class ClientOrmRepository(ClientAbstractRepository):
@@ -34,7 +34,7 @@ class ClientOrmRepository(ClientAbstractRepository):
         ).all()
 
         if not client_obj:
-            raise ClientNotFound(client_id)
+            raise ClientNotFoundError(client_id)
 
         balance = sum(obj[1].balance for obj in client_obj) if client_obj[0][1] else 0.0
         transactions = [Transaction(**obj[2].__dict__) for obj in client_obj] if client_obj[0][2] else []
